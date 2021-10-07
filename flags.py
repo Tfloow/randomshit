@@ -1,6 +1,8 @@
 import turtle
 import random
 import math
+
+turtle.bgcolor("#F3F4ED")
 turtle.title("Made by Thomas")
 turtle.setup(1080, 720, 0, 0)
 turtle.speed(0)
@@ -10,7 +12,7 @@ deutschland = ["black", "red", "yellow", "h"]
 netherlands = ["red", "white","#265B9C", "h"]
 luxemburg = ["red", "white", "#12B3E3", "h"]
 colorLgbtq = ["red", "orange", "yellow", "green", "blue", "purple"]
-colorLgbtqi = ["black", "brown", "blue", "pink", "white", "yellow"]
+colorLgbtqi = ["black", "#945300", "#78D3FE", "#FAB8EC", "white", "#FFFB01"]
 turtle.penup()
 
 def Square(size, color):
@@ -25,9 +27,10 @@ def Square(size, color):
     turtle.penup()
 
 
-def Rectangle(height, width, color):
+def Rectangle(height, width, color, rot):
     turtle.penup()
     turtle.pendown()
+    turtle.setheading(rot)
     turtle.color(color)
     turtle.begin_fill()
     for i in range(1, 3):
@@ -39,31 +42,31 @@ def Rectangle(height, width, color):
     return height
     return width
 
-def Flags(height, width, name, pos1, pos2):
+def Flags(height, width, name, pos1, pos2, rot):
     if name[3] == "h":
         for c in range(len(name)-1):
             turtle.goto(pos1, pos2 - c * height//3)
             turtle.pendown()
-            Rectangle(height//3,width,name[c])
+            Rectangle(height//3,width,name[c], rot)
             turtle.penup()
     elif name[3] == "v":
         for c in range(len(name)-1):
             turtle.goto(pos1 + c * width//3, pos2)
             turtle.pendown()
-            Rectangle(height, width // 3, name[c])
+            Rectangle(height, width // 3, name[c], rot)
             turtle.penup()
 
 #thomas
 
-def Star(heightStar, number, color):
+def Star(heightStar, number, color, rot, height,width, pos1, pos2):
     angle = 360 / number
     turtle.penup()
     turtle.color(color)
-    turtle.goto(0, 0)
+    turtle.goto(pos1 + math.ceil(width//4), pos2 - height//2 + heightStar//2)
+    print(turtle.pos())
     for f in range(0, number):
-        turtle.goto(-150, heightStar / 2)
-        turtle.setheading(-90)
-        turtle.circle(150, angle + angle * f)
+        turtle.setheading(-90 + f * angle + rot)
+        turtle.circle(width//4, angle)
         turtle.begin_fill()
         turtle.left(18)
         turtle.setheading(-72)
@@ -75,10 +78,10 @@ def Star(heightStar, number, color):
         turtle.penup()
 
 
-def Brasil(height, width, pos1, pos2):
+def Brasil(height, width, pos1, pos2, rot):
     turtle.goto(pos1, pos2)
     turtle.setheading(0)
-    Rectangle(height, width, "#00923E")
+    Rectangle(height, width, "#00923E", rot)
     turtle.penup()
     turtle.goto(pos1 + width//12, 0)
     turtle.color("#F8C100")
@@ -143,10 +146,10 @@ def Brasil(height, width, pos1, pos2):
         turtle.penup()
 
 
-def Lgbtq(height, width, pos1, pos2):
+def Lgbtq(height, width, pos1, pos2, rot):
     for i in range(6):
         turtle.goto(pos1, pos2 - i * height/6)
-        Rectangle(height/6,width, colorLgbtq[i])
+        Rectangle(height/6,width, colorLgbtq[i], rot)
     turtle.penup()
     for z in range(len(colorLgbtqi)):
         turtle.goto(pos1 + width//4 - z * width//20 ,pos2)
@@ -167,29 +170,39 @@ def Lgbtq(height, width, pos1, pos2):
         turtle.penup()
     turtle.goto(pos1,pos2)
     turtle.setheading(-90)
-    Rectangle(height,width,"white")
+    Rectangle(pos2 + height//2,pos1 + width//16,"#F3F4ED", 0)
     turtle.penup()
-    turtle.goto(pos1 + width//20, pos2 - height/2)
-    turtle.color("purple")
-    turtle.pensize(10)
+    turtle.setheading(-90)
+    turtle.goto(pos1 + width//14, pos2 - height//2)
+    turtle.color("#9C36EE")
+    turtle.pensize(height//40)
     turtle.pendown()
     turtle.circle(50)
     turtle.pensize(1)
     turtle.penup()
     turtle.setheading(0)
 
-Lgbtq(400, 600, 0, 200)
-Flags(200,300, netherlands,-640,-160)
-Flags(200,300, luxemburg,-340 ,-160)
-Flags(200,300, deutschland,-40, -160)
-Flags(200,300, belgium, 260, -160)
-Flags(200,300, france,-640, 360)
-turtle.goto(-300, 200)
-Rectangle(400, 600, "#0A4EAB")
-Star(40, 12, "#FBD13D")
+def Europe(height, width, heightStar, number, color, rot, pos1,pos2):
+    Rectangle(height, width, "#0A4EAB", rot)
+    Star(heightStar, number, color, rot, height, width,pos1,pos2)
 
-Brasil(400, 600, -300, 200)
-if str(turtle.textinput("square", "do you want a square ?")) == "yes":
+
+Flags(200,300, netherlands,-640,0,0)
+Flags(200,300, luxemburg,-340 ,-60,0)
+Flags(200,300, deutschland,-40, -160,0)
+Flags(200,300, belgium, 260, -60,0)
+Flags(200,300, france,-40, 40,0)
+posEuX = int(turtle.textinput("posEu", "x EU?"))
+posEuY = int(turtle.textinput("posEu", "y EU?"))
+heightEu = int(turtle.textinput("Height flag", "height ?"))
+turtle.goto(posEuX, posEuY)
+Europe(heightEu, heightEu*1.5, heightEu//10, 12, "#FBD13D",0, posEuX, posEuY)
+
+#Brasil(400, 600, -300, 200, 0)
+ans = str(turtle.textinput("square", "do you want a square ?"))
+if ans == "yes":
     Square(300, "red")
+elif ans == "phoebe":
+    Lgbtq(heightEu, heightEu*1.5, posEuX, posEuY, 0)
 turtle.goto(1000,0)
 turtle.exitonclick()
