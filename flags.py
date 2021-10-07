@@ -198,7 +198,7 @@ heightEu = int(turtle.textinput("Height flag", "height ?"))
 turtle.goto(posEuX, posEuY)
 Europe(heightEu, heightEu*1.5, heightEu//10, 12, "#FBD13D",0, posEuX, posEuY)
 
-#Brasil(400, 600, -300, 200, 0)
+Brasil(400, 600, -300, 200, 0)
 ans = str(turtle.textinput("square", "do you want a square ?"))
 if ans == "yes":
     Square(300, "red")
