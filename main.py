@@ -17,9 +17,13 @@ def angle(function):
     for x in range(51):
         derivated = 2*a*x
         print(derivated)
-        app = str(str(derivated) + "(x-" + str(x//2) + ")")
+        app = str(str(derivated) + "(x-" + str(x/2) + ")")
         tangent.append(app)
     print(tangent)
 
 
+def speed(data):
+
+
 angle(a*x**2)
+print(open("billeDataset2.txt", "r").readlines()[3])
