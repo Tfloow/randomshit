@@ -22,8 +22,23 @@ def angle(function):
     print(tangent)
 
 
-def speed(data):
-
+def speed(data, place):
+    t = []
+    x = []
+    y = []
+    v = 0
+    i = 2
+    place = int(place)
+    f = open(data, "r")
+    r = float(f.readlines()[place + i][:10])
+    f.close()
+    f = open(data, "r")
+    r2 = float(f.readlines()[place + 1][:10])
+    print(r2)
+    result = r2 - r
+    print(r)
+    print(result)
 
 angle(a*x**2)
 print(open("billeDataset2.txt", "r").readlines()[3])
+speed("billeDataset2.txt", 20)
