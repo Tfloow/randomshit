@@ -30,14 +30,13 @@ def speed(data, place):
     i = 2
     r = []
     place = int(place)
-    for i in range(2):
-        f = open(data, "r")
-        r.append(float(f.readlines()[place + i][:10]))
-        f.close()
-    result =
-    print(r)
-    print(r)
-    print(result)
+    for k in range(5):
+        for i in range(2):
+            f = open(data, "r")
+            r.append(float(f.readlines()[place + i][:10]))
+            f.close()
+        result = r[k]-r[k-1]
+        print(result)
 
 angle(a*x**2)
 print(open("billeDataset2.txt", "r").readlines()[3])
