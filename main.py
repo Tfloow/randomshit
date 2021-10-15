@@ -28,14 +28,14 @@ def speed(data, place):
     y = []
     v = 0
     i = 2
+    r = []
     place = int(place)
-    f = open(data, "r")
-    r = float(f.readlines()[place + i][:10])
-    f.close()
-    f = open(data, "r")
-    r2 = float(f.readlines()[place + 1][:10])
-    print(r2)
-    result = r2 - r
+    for i in range(2):
+        f = open(data, "r")
+        r.append(float(f.readlines()[place + i][:10]))
+        f.close()
+    result =
+    print(r)
     print(r)
     print(result)
 
