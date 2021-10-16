@@ -1,9 +1,4 @@
-f = open("test.txt", "a")
-f.write("test \n")
-f.close()
-print(open("test.txt", "r").read())
-x = 1
-a = 0.0134
+import numpy
 
 
 def delete(file):
@@ -12,32 +7,49 @@ def delete(file):
     d.close()
 
 
-def angle(function):
+def angle():
     tangent = []
-    for x in range(51):
-        derivated = 2*a*x
-        print(derivated)
-        app = str(str(derivated) + "(x-" + str(x/2) + ")")
+    for x in range(105):
+        derivated = 2 * 35/2601 * x -70/51
+        d = 35/2601*x**2-70/51*x+40 - derivated*x
+        angleLow = numpy.arctan(numpy.absolute(derivated))*180/numpy.pi
+        angleUp = 90 - angleLow
+        app = str(str(x)+ str(" ") + str(derivated) + "(x)+" + str(d)+ " upper angle: "+ str(angleUp) + " lower angle :" + str(angleLow)+str("\n"))
         tangent.append(app)
-    print(tangent)
+    print(numpy.array(tangent))
+    pretty = "example: "
+    for f in range(105):
+        pretty+= tangent[f]
+    open("modified data.txt", "w").write(pretty)
 
 
-def speed(data, place):
+def speed(place):
     t = []
     x = []
     y = []
     v = 0
     i = 2
     r = []
+    resultx = []
+    resulty = []
     place = int(place)
-    for k in range(5):
+    for k in range(3604):  # 3605
+        tempx = []
+        tempy = []
         for i in range(2):
-            f = open(data, "r")
-            r.append(float(f.readlines()[place + i][:10]))
+            f = open("xbille.txt", "r")
+            tempx.append(float(f.readlines()[2 + k + i][:16]))
             f.close()
-        result = r[k]-r[k-1]
-        print(result)
+        resultx.append(tempx[0] - tempx[1] / 0.016554757367439336)
+        for i in range(2):
+            f = open("ybille.txt", "r")
+            tempy.append(float(f.readlines()[2 + k + i][:16]))
+            f.close()
+        resulty.append(tempy[0] - tempy[1] / 0.016554757367439336)
+    print(numpy.array(resultx))
+    print(numpy.array(resulty))
 
-angle(a*x**2)
+delete("modified data.txt")
+angle()
 print(open("billeDataset2.txt", "r").readlines()[3])
-speed("billeDataset2.txt", 20)
+speed(20)
