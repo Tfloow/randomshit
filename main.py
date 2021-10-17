@@ -37,7 +37,19 @@ def Sacceleration(h,e, Sspeed, r):
     k = angle(73,74)[1]
     print(k)
     g = 9.81
-    Sacceleration = 5*h*(-e*Sspeed**2*k-g*numpy.cos(conAngle)*e*Sspeed+h*g*numpy.sin(conAngle))/2*r**2+5*h**2
+    down = r**2
+    down *= 2
+    down1 = h**2
+    down1 *= 5
+    down += down1
+    up1 = Sspeed**2
+    up1 *= -e*k
+    up2 = numpy.cos(conAngle)
+    up2 *= -g*e*Sspeed
+    up3 = numpy.sin(conAngle)
+    up3 *= h*g
+    Sacceleration = up1 + up2 + up3
+    Sacceleration = Sacceleration/down
     print(Sacceleration)
 
 def speed(place):
