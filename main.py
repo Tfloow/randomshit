@@ -52,6 +52,30 @@ def Sacceleration(h,e, Sspeed, r):
     Sacceleration = Sacceleration/down
     print(Sacceleration)
 
+
+def friction(h, r):
+    conAngle =angle(73,74)[0]*numpy.pi/180
+    print(conAngle)
+    k = angle(0,1)[1]
+    print(k)
+    g = 9.81
+    up = r**2
+    up *=2
+    up1 = h**2
+    up1 *= 5
+    up += up1
+    down1 = speed(73)**3
+    down1 *= -k
+    down2 = numpy.cos(conAngle)*speed(73)*g
+    down = down1 - down2
+    down *= 5*h
+    fraction = up/down
+    last = h*g*numpy.sin(conAngle)
+    friction = speed(73)*fraction - last
+    print(friction)
+
+
+
 def speed(place):
     t = []
     x = []
@@ -84,3 +108,4 @@ def speed(place):
 #speed(20)
 
 Sacceleration(0.00795, 0.1,10, 0.008)
+friction(0.00795, 0.008)
